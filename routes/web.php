@@ -13,41 +13,36 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
-    
+
     return view('landing');
 })->name('landing');
 
 Route::get('/kalender', [App\Http\Controllers\KalenderController::class, 'index'])->name('kalender');
-
+Route::get('/send_message', [App\Http\Controllers\MessageController::class, 'index'])->name('send_message');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::resource('user', UserController::class)->only('edit', '
 update', 'store');
 
-
-
 Route::middleware('auth')->group(function () {
-    Route::get('gantiPassword',  [App\Http\Controllers\UserController::class, 'gantiPassword'])->name('gantiPassword');
-    Route::post('gantiPassword/update',  [App\Http\Controllers\UserController::class, 'gantiPasswordUpdate'])->name('gantiPassword.update');
-
+    Route::get('gantiPassword', [App\Http\Controllers\UserController::class, 'gantiPassword'])->name('gantiPassword');
+    Route::post('gantiPassword/update', [App\Http\Controllers\UserController::class, 'gantiPasswordUpdate'])->name('gantiPassword.update');
 
     Route::group(['middleware' => ['role:user']], function () {
         Route::prefix('u')->name('user.')->group(function () {
 
-
-            Route::get('formulir/pengajuan-step-one',  [App\Http\Controllers\User\FormulirController::class, 'createStepOne'])->name('createPengajuanStepOne');
-            Route::post('formulir/pengajuan-step-one', [App\Http\Controllers\User\FormulirController::class, 'postCreateStepOne'] )->name('createPengajuanStepOnePost');
+            Route::get('formulir/pengajuan-step-one', [App\Http\Controllers\User\FormulirController::class, 'createStepOne'])->name('createPengajuanStepOne');
+            Route::post('formulir/pengajuan-step-one', [App\Http\Controllers\User\FormulirController::class, 'postCreateStepOne'])->name('createPengajuanStepOnePost');
 
             Route::get('formulir/pengajuan-step-two', [App\Http\Controllers\User\FormulirController::class, 'createStepTwo'])->name('createPengajuanStepTwo');
             Route::post('formulir/pengajuan-step-two', [App\Http\Controllers\User\FormulirController::class, 'postCreateStepTwo'])->name('createPengajuanStepTwoPost');
-            
+
             Route::get('formulir/pengajuan-step-three', [App\Http\Controllers\User\FormulirController::class, 'createStepThree'])->name('createPengajuanStepThree');
             Route::post('formulir/pengajuan-step-three', [App\Http\Controllers\User\FormulirController::class, 'postCreateStepThree'])->name('createPengajuanStepThreePost');
 
@@ -57,7 +52,6 @@ Route::middleware('auth')->group(function () {
             Route::get('formulir/pengajuan-step-five', [App\Http\Controllers\User\FormulirController::class, 'createStepFive'])->name('createPengajuanStepFive');
             Route::post('formulir/pengajuan-step-five', [App\Http\Controllers\User\FormulirController::class, 'postCreateStepFive'])->name('createPengajuanStepFivePost');
 
-
             Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('page');
             Route::get('datadiri', [App\Http\Controllers\User\FormulirController::class, 'index'])->name('data_diri');
             Route::delete('destroyKendaraan/{id}', [App\Http\Controllers\User\FormulirController::class, 'destroyKendaraan'])->name('destroyKendaraan');
@@ -66,15 +60,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/kelurahan/{id}', [App\Http\Controllers\User\DashboardController::class, 'tampilKelurahan']);
             Route::get('/getOrangTua/{id}', [App\Http\Controllers\User\DashboardController::class, 'tampilOrangTua']);
 
-            Route::get('riwayatFormulir',  [App\Http\Controllers\User\DataDiriController::class, 'riwayatFormulir'])->name('riwayatFormulir');
+            Route::get('riwayatFormulir', [App\Http\Controllers\User\DataDiriController::class, 'riwayatFormulir'])->name('riwayatFormulir');
 
+            Route::get('dataDiri', [App\Http\Controllers\User\DataDiriController::class, 'dataDiri'])->name('dataDiri');
+            Route::get('editDataDiri', [App\Http\Controllers\User\DataDiriController::class, 'editDataDiri'])->name('editDataDiri');
 
-            Route::get('dataDiri',  [App\Http\Controllers\User\DataDiriController::class, 'dataDiri'])->name('dataDiri');
-            Route::get('editDataDiri',  [App\Http\Controllers\User\DataDiriController::class, 'editDataDiri'])->name('editDataDiri');
-   
-            Route::get('cetakFormulir',  [App\Http\Controllers\User\DataDiriController::class, 'cetakFormulir'])->name('cetakFormulir');
+            Route::get('cetakFormulir', [App\Http\Controllers\User\DataDiriController::class, 'cetakFormulir'])->name('cetakFormulir');
             Route::get('formulir/cari/{kk}', [App\Http\Controllers\User\DataDiriController::class, 'cariNIK'])->name('cariNIK');
-
 
             // Route::resource('', BuildingController::class)->parameter('', 'building')->only('create', 'store');
         });
@@ -85,9 +77,9 @@ Route::middleware('auth')->group(function () {
             Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('page');
             Route::get('verifikasiFormulir', [App\Http\Controllers\Admin\FormulirController::class, 'verifikasiFormulir'])->name('verifikasiFormulir');
             Route::post('verifikasiFormulir/tolak', [App\Http\Controllers\Admin\FormulirController::class, 'tolakFormulir'])->name('verifikasiFormulir.tolak');
-            
+
         });
-   
+
     });
 
     Route::group(['middleware' => ['role:superadmin']], function () {
@@ -95,9 +87,8 @@ Route::middleware('auth')->group(function () {
             Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('page');
 
         });
-     
-    });
 
+    });
 
     Route::group(['middleware' => ['role:kecamatan']], function () {
         Route::prefix('kecamatan')->name('kecamatan.')->group(function () {
@@ -109,8 +100,7 @@ Route::middleware('auth')->group(function () {
             Route::get('verifikasi/laporanSpj/list/disetujui', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'realisasiDisetujui'])->name('laporanSpj.disetujui');
             Route::get('verifikasi/laporanSpj/list/ditolak', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'realisasiDitolak'])->name('laporanSpj.ditolak');
             Route::get('verifikasi/laporanSpj/list/semua', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'realisasiSemua'])->name('laporanSpj.semua');
-           
-           
+
             Route::post('verifikasi/rencanaKerja/disetujui/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'verifikasiSetuju'])->name('verifikasi.rencanaKerja.disetujui');
             Route::post('verifikasi/rencanaKerja/ditolak/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'verifikasiTolak'])->name('verifikasi.rencanaKerja.ditolak');
             Route::post('verifikasi/rencanaKerja/ditarik/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'verifikasiDitarik'])->name('verifikasi.rencanaKerja.ditarik');
@@ -121,7 +111,7 @@ Route::middleware('auth')->group(function () {
             Route::get('verifikasi/laporanSpj/finalisasiSetuju/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'finalisasiRealisasiSetuju'])->name('verifikasi.laporanSpj.finalisasiSetuju');
             Route::post('verifikasi/laporanSpj/finalisasiTolak/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'finalisasiRealisasiTolak'])->name('verifikasi.laporanSpj.finalisasiTolak');
             Route::get('verifikasi/laporanSpj/bukaKuncian/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'bukaKuncianRealisasi'])->name('verifikasi.laporanSpj.bukaKuncian');
-          
+
             Route::get('verifikasi/laporanSpj/readOnly/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'readOnly'])->name('verifikasi.laporanSpj.readOnly');
             // Route::get('laporanSpj', [App\Http\Controllers\Kelurahan\LaporanController::class, 'index'])->name('laporanSpj');
             // Route::get('laporanSpj/create/{id}', [App\Http\Controllers\Kelurahan\LaporanController::class, 'create'])->name('laporanSpj.create');
@@ -153,18 +143,14 @@ Route::middleware('auth')->group(function () {
         // Route::resource('tenants', TenantController::class)->only('create', 'store');
     });
 
-
-
     // Route::group(['middleware' => ['role:superadmin']], function () {
     //     Route::resource('tenants', TenantController::class)->except('create', 'store');
 
     //     Route::resource('employees', EmployeeController::class);
     //     Route::get('import', [EmployeeController::class, 'import'])->name('employees.import');
     //     Route::post('import', [EmployeeController::class, 'postImport'])->name('employees.post-import');
-   
-    // });
 
-  
+    // });
 
     // Route::prefix('employees')->name('employees.')->group(function () {
     //     // Route::get('employees', [EmployeeController::class, 'index'])->name('employees.index');
@@ -179,6 +165,5 @@ Route::middleware('auth')->group(function () {
     //     Route::put('tenant/{id}/edit', [EmployeeController::class, 'edit'])->name('edit');
 
     // });
-
 
 });

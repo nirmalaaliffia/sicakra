@@ -10,7 +10,7 @@ class MessageController extends Controller
     public function index()
     {
         $besuk = date('Y-m-d', strtotime('1 days', strtotime(date('Y-m-d'))));
-        $rencanakerja = Rencana_kerja::whereDate('waktu_mulai', '=', $besuk)->orderBy('waktu_mulai', 'ASC')->get();
+        $rencanakerja = Rencana_kerja::whereDate('waktu_mulai', '=', $besuk)->where('status_verifikasi', '=', 'Disetujui')->orderBy('waktu_mulai', 'ASC')->get();
 
         $i = 0;
         $message = "Jadwal Rencana Kerja - $besuk \n\n";

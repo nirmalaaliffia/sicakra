@@ -16,7 +16,7 @@ class MessageController extends Controller
         $message = "Jadwal Rencana Kerja - $besuk \n\n";
         foreach ($rencanakerja as $data) {
             $i++;
-            $message = $message . $i . ". " . date("H:i", strtotime($data->waktu_mulai)) . " - " . date("H:i", strtotime($data->waktu_selesai)) . "\nAgenda : " . $data->nama_rencana . "\nLokasi : " . $data->lokasi . "\n\n";
+            $message = $message . $i . ". " . date("H:i", strtotime($data->waktu_mulai)) . " - " . date("H:i", strtotime($data->waktu_selesai)) . "\n     Agenda : " . $data->nama_rencana . "\n     Lokasi : " . $data->lokasi . "\n\n";
         }
 
         $messages = urlencode($message);

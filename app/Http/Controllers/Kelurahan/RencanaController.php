@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Kelurahan;
 
+use DateTime;
 use App\Models\Opd;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Models\Rencana_kerja;
 use App\Http\Controllers\Controller;
-use App\Models\Rencana_kerja as ModelsRencana_kerja;
-use App\States\Rencana_kerja\Disetujui;
 use App\States\Rencana_kerja\Ditolak;
 use App\States\Rencana_kerja\Diajukan;
+use App\States\Rencana_kerja\Disetujui;
 use GuzzleHttp\Exception\RequestException;
+use App\Models\Rencana_kerja as ModelsRencana_kerja;
 
 class RencanaController extends Controller
 {
@@ -75,12 +76,18 @@ class RencanaController extends Controller
      */
     public function store(Request $request)
     {
+        $waktuMulai = DateTime::createFromFormat('d/m/Y H:i', $request->waktu_mulai);
+        $newDateMulai = $waktuMulai->format('Y-m-d H:i');
+
+        $waktuSelesai = DateTime::createFromFormat('d/m/Y H:i', $request->waktu_selesai);
+        $newDateSelesai = $waktuSelesai->format('Y-m-d H:i');
+
             $rencana_kerja = new rencana_kerja();
             $rencana_kerja->user_id = auth()->id();
             $rencana_kerja->nama_rencana =  $request->nama_rencana;
             $rencana_kerja->lokasi = $request->lokasi;
-            $rencana_kerja->waktu_mulai = $request->waktu_mulai;
-            $rencana_kerja->waktu_selesai = $request->waktu_selesai;
+            $rencana_kerja->waktu_mulai = $newDateMulai;
+            $rencana_kerja->waktu_selesai = $newDateSelesai;
             $rencana_kerja->penanggung_jawab = $request->penanggung_jawab;
             $rencana_kerja->creator_id = auth()->id();
             $rencana_kerja->status_verifikasi = "Diajukan";
@@ -129,11 +136,17 @@ class RencanaController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        $waktuMulai = DateTime::createFromFormat('d/m/Y H:i', $request->waktu_mulai);
+        $newDateMulai = $waktuMulai->format('Y-m-d H:i');
+
+        $waktuSelesai = DateTime::createFromFormat('d/m/Y H:i', $request->waktu_selesai);
+        $newDateSelesai = $waktuSelesai->format('Y-m-d H:i');
+
         $rencana_kerja = Rencana_kerja::findOrFail($id);
         $rencana_kerja->nama_rencana = $request->nama_rencana;
         $rencana_kerja->lokasi = $request->lokasi;
-        $rencana_kerja->waktu_mulai = $request->waktu_mulai;
-        $rencana_kerja->waktu_selesai = $request->waktu_selesai;
+        $rencana_kerja->waktu_mulai = $newDateMulai;
+        $rencana_kerja->waktu_selesai = $newDateSelesai;
         $rencana_kerja->penanggung_jawab = $request->penanggung_jawab;
         $rencana_kerja->rundown_kegiatan = $request->rundown;
         $rencana_kerja->jumlah_peserta = $request->peserta;

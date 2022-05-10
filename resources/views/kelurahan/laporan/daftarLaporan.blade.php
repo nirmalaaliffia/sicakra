@@ -39,6 +39,9 @@
                                             </div>
                                         </div><br>
                                         @endif
+
+                                       
+                                        
 										<!--begin: Datatable-->
 										<table class="table table-separate table-head-custom table-checkable" id="kt_datatableLaporan">
 											<thead>
@@ -121,7 +124,7 @@
                                            
                                             @empty
                                                 <tr>
-                                                    <td colspan="5" class="text-center">Belum ada Rencana Kerja yang dibuat</td>
+                                                    <td colspan="7" class="text-center">Belum ada Rencana Kerja yang disetujui</td>
                                                 </tr>
                                             @endforelse
 												
@@ -140,8 +143,12 @@
 						</div>
 						<!--end::Entry-->
        
-                        @include('kelurahan.laporan.form.create')
-                        @include('kelurahan.rencanakerja.show')
+                        @if ($forms == null)
+                            @include('kelurahan.laporan.form.create')
+                            @include('kelurahan.rencanakerja.show')      
+                       
+                        @endif
+                       
 
                     
                         <form action="" method="post" id="deleteForm">

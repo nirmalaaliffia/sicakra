@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     
     <!--====== Title ======-->
-    <title>Consult - Business Consultancy Agency Template | Home</title>
+    <title>Sicakra Kota Madiun</title>
     
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('asset_admin/Lambang_Kota_Madiun.png') }}" />
   
     <!--====== Slick CSS ======-->
     <link rel="stylesheet" href="{{ asset('landing/assets/css/slick.css') }}">
@@ -75,9 +75,9 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                            
-                            <a class="navbar-brand" href="index.html" style="max-width:20%; max-height:20%">
+                            <a class="navbar-brand" href="{{ route('landing') }}" style="max-width:15%; max-height:15%">
                                
-                                <img src="{{ asset('landing/assets/images/madiunkotapendekar.png') }}" alt="Logo">
+                                <img src="{{ asset('landing/assets/images/LOGO_PENDEKAR DISBUD.png') }}" alt="Logo">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -110,7 +110,7 @@
                             @else
 
                                 <li class="nav-item">
-                                    <a href="#blog"> Pengaturan Akun</a>
+                                    <a href="{{ route('gantiPassword') }}"> Pengaturan Akun</a>
                                 </li>
                                 @if(auth()->user()->hasRole('admin'))
                                 <li class="nav-item"><a href="{{ route('admin.page') }}">Dashboard</a></li>

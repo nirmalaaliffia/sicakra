@@ -110,12 +110,19 @@ class VerifikasiController extends Controller
         //
     }
 
+    public function showRencana($id)
+    {
+        $forms = Rencana_kerja::where('id', '=', $id)->with('opd')->get();
+
+        return $forms;
+    }
+
     public function daftarDiajukan(){
        
         // $forms =  Rencana_kerja::join('users', 'users.id', '=', 'rencana_kerjas.user_id')
         //         ->where('users.kecamatan_id', auth()->id())->whereState('status_verifikasi', Diajukan::class)->where('rencana_kerjas.deleted_at', '=', null)->get();
     
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user, u.name as nama, o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -125,7 +132,7 @@ class VerifikasiController extends Controller
     }
 
     public function daftarDisetujui(){
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user,u.name as nama,  o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -134,7 +141,7 @@ class VerifikasiController extends Controller
     }
 
     public function daftarDitolak(){
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user, u.name as nama, o.nama_skpd, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -146,7 +153,7 @@ class VerifikasiController extends Controller
 
     public function realisasiDiajukan(){
        
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user,u.name as nama,  o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -158,7 +165,7 @@ class VerifikasiController extends Controller
     }
 
     public function realisasiDisetujui(){
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user,u.name as nama,  o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -169,7 +176,7 @@ class VerifikasiController extends Controller
     }
 
     public function realisasiDitolak(){
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user, u.name as nama, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab
@@ -179,7 +186,7 @@ class VerifikasiController extends Controller
     }
 
     public function realisasiSemua(){
-        $forms = DB::select(DB::raw("select a.id as id, u.id as user, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
+        $forms = DB::select(DB::raw("select a.id as id, u.id as user, u.name as nama, o.nama_skpd, status_spj, nama_rencana, lokasi, waktu_mulai, waktu_selesai, penanggung_jawab, creator_id, tanggal_verifikasi, verificated_by, status_verifikasi, keterangan, jumlah_peserta,rundown_kegiatan, a.created_at, a.updated_at, a.deleted_at, kecamatan_id
         from rencana_kerjas a
         join users u on u.id = a.user_id
         left join opds o on o.id = a.penanggung_jawab

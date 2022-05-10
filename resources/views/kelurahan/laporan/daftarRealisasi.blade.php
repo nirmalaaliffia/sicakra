@@ -63,16 +63,16 @@
                                                 <i class="flaticon2-add"></i>Upload Realisasi</button>&emsp;
                                                 <!--end::Button-->
     
-                                                <a href="{{ route('kelurahan.laporanSpj.ajukan', $form->id) }}" class="btn btn-info font-weight-bolder">
-                                                    <i class="flaticon2-sheet"></i>Ajukan Realisasi</a> 
+                                                <button type="button" href="{{ route('kelurahan.laporanSpj.ajukan', $form->id) }}" id="ajukanRelisasiBtn" class="btn btn-info font-weight-bolder ">
+                                                    <i class="flaticon2-sheet"></i>Ajukan Realisasi</button> 
                                                     
                                                 @else
                                                     
                                                 @endif
 
                                                 @if ($form->status_spj == "Diajukan")
-                                                <a href="{{ route('kelurahan.laporanSpj.ajukanBatal', $form->id) }}" class="btn btn-warning font-weight-bolder">
-                                                    <i class="flaticon2-sheet"></i>Batalkan Pengajuan Realisasi</a> 
+                                                <button type="button" href="{{ route('kelurahan.laporanSpj.ajukanBatal', $form->id) }}" id="batalkanRelisasiBtn" class="btn btn-warning font-weight-bolder">
+                                                    <i class="flaticon2-sheet"></i>Batalkan Pengajuan Realisasi</button> 
                                                    
                                                 @endif
 										
@@ -186,6 +186,7 @@
 							<!--end::Container-->
 						</div>
 						<!--end::Entry-->
+                        
        
                         @include('kelurahan.laporan.form.create')
                         @include('kelurahan.laporan.form.show')
@@ -198,6 +199,10 @@
                             <button type="submit" style="display:none">Hapus</button>
                         </form>
                         
+                        <form action="" method="post" id="setujuForm">
+                            @csrf
+                            <button type="submit" style="display:none">Setuju</button>
+                        </form>
                         
 @endsection
 
@@ -205,6 +210,65 @@
 
 @push('scripts')
 
+<script>
+
+      
+    $('button#ajukanRelisasiBtn').on('click', function(e){
+            e.preventDefault();
+            var href = $(this).attr('href');
+
+            Swal.fire({
+				title: 'Apakah anda yakin ingin mengajukan realisasi?',
+                text: "Realisasi yang diajukan akan diverifikasi oleh Kecamatan!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Ajukan!'
+                }).then((result) => {
+                if (result.value) {
+                    document.getElementById('setujuForm').action = href;
+                    document.getElementById('setujuForm').submit();
+					
+                    // Swal.fire(
+                    //     'Berhasil!',
+                    //     'Realisasi berhasil diajukan.',
+                    //     'success'
+                    // )
+                }
+            })
+        })
+</script>
+
+<script>
+
+      
+    $('button#batalkanRelisasiBtn').on('click', function(e){
+            e.preventDefault();
+            var href = $(this).attr('href');
+
+            Swal.fire({
+				title: 'Apakah anda yakin ingin membatalkan pengajuan realisasi?',
+                text: "Realisasi yang belum diverifikasi oleh Kecamatan dapat dibatalkan pengajuan dan diubah kembali.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Batalkan pengajuan!'
+                }).then((result) => {
+                if (result.value) {
+                    document.getElementById('setujuForm').action = href;
+                    document.getElementById('setujuForm').submit();
+					
+                    // Swal.fire(
+                    //     'Berhasil!',
+                    //     'Realisasi berhasil diajukan.',
+                    //     'success'
+                    // )
+                }
+            })
+        })
+</script>
 
 <script>
 

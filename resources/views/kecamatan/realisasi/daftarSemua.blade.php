@@ -119,10 +119,11 @@
 											<thead>
 												<tr>
 													<th style="max-width:6%">No</th>
+													<th style="max-width:15%">Pembuat</th>
 													<th style="max-width:25%">Rencana Kerja</th>
 													<th style="max-width:25%">Rincian Rencana Kerja</th>
 													<th style="max-width:15%">Penanggung Jawab</th>
-													<th style="max-width:15%">Status</th>
+													<th style="max-width:25%">Status</th>
 													<th style="max-width:15%">Aksi</th>
 												</tr>
 											</thead>
@@ -132,6 +133,7 @@
                                                 @php $i++; @endphp
                                                 <tr>
                                                     <td>{{ $i }}</td>
+													<td>{{ $form->nama }}</td>
                                                     <td> {{ $form->nama_rencana }}</td>
                                                     <td>Lokasi = <strong> {{ $form->lokasi }} </strong> <br>
                                                         Waktu Mulai = <strong>  {{  date('d-m-Y H:i', strtotime($form->waktu_mulai )) }} </strong> <br>

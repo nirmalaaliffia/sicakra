@@ -24,6 +24,11 @@ class LaporanController extends Controller
     {
         $forms = Rencana_kerja::where('user_id', '=', auth()->id())->whereState('status_verifikasi', Disetujui::class)->orderBy('waktu_mulai', 'DESC')->get();
         $opds =  Opd::orderBy('nama_skpd')->get();
+
+        if(count($forms) == 0){
+          
+            return view('kelurahan.laporan.daftarLaporan', compact('forms', 'opds'));
+        }
      
         return view('kelurahan.laporan.daftarLaporan', compact('forms', 'opds'));
     }

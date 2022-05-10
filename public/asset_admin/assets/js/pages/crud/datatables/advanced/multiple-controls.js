@@ -413,7 +413,7 @@ var KTDatatablesAdvancedMultipleControls = function() {
 				// },
 				{
 					width: '90px',
-					targets: 4,
+					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
 							
@@ -488,7 +488,7 @@ var KTDatatablesAdvancedMultipleControls = function() {
 				// },
 				{
 					width: '90px',
-					targets: 4,
+					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
 							
@@ -561,7 +561,7 @@ var KTDatatablesAdvancedMultipleControls = function() {
 				// },
 				{
 					width: '90px',
-					targets: 4,
+					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
 							
@@ -634,7 +634,7 @@ var KTDatatablesAdvancedMultipleControls = function() {
 				// },
 				{
 					width: '90px',
-					targets: 4,
+					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
 							
@@ -780,7 +780,7 @@ var KTDatatablesAdvancedMultipleControls = function() {
 				// },
 				{
 					width: '90px',
-					targets: 4,
+					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
 							

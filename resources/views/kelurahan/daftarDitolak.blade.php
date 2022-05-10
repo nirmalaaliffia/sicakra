@@ -175,7 +175,7 @@
 
 	$(".passingTolak").click(function () {
 		var ids = $(this).attr('data-id');
-		console.log('data')
+		// console.log('data')
 		$('#myModal').modal('show');
 		$.get('{{ url('kelurahan/rencanaKerja/show')}}/'+ids, function(data){
 		 $("#nama_rencana_show").val(data[0]['nama_rencana']);

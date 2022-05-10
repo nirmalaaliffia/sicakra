@@ -119,6 +119,7 @@
 											<thead>
 												<tr>
 													<th style="max-width:6%">No</th>
+													<th style="max-width:20%">Pembuat</th>
 													<th style="max-width:30%">Rencana Kerja</th>
 													<th style="max-width:25%">Rincian Rencana Kerja</th>
 													<th style="max-width:15%">Penanggung Jawab</th>
@@ -132,6 +133,7 @@
                                                 @php $i++; @endphp
                                                 <tr>
                                                     <td>{{ $i }}</td>
+													<td>{{ $form->nama }}</td>
                                                     <td> {{ $form->nama_rencana }}</td>
                                                     <td>Lokasi = <strong> {{ $form->lokasi }} </strong> <br>
                                                         Waktu Mulai = <strong>  {{  date('d-m-Y H:i', strtotime($form->waktu_mulai )) }} </strong> <br>
@@ -246,7 +248,8 @@
 		var ids = $(this).attr('data-id');
 		console.log('data')
 		$('#myModal').modal('show');
-		$.get('{{ url('kelurahan/rencanaKerja/show')}}/'+ids, function(data){
+		$.get('{{ url('kecamatan/rencanaKerja/show')}}/'+ids, function(data){
+			// console.log(data)
 		 $("#nama_rencana_show").val(data[0]['nama_rencana']);
 		 $("#lokasi_show").val(data[0]['lokasi']);
 		 $("#waktu_mulai_show").val(data[0]['waktu_mulai']);
@@ -255,7 +258,6 @@
 		 $("#peserta_show").val(data[0]['jumlah_peserta']);
 		 $("#penanggung_jawab_show").val(data[0]['opd']['nama_skpd']);
 	     $("#status_verifikasi_show").val(data[0]['status_verifikasi']);
-   
 		//    console.log(data[0]['opd']['nama_skpd'])
 	
 			

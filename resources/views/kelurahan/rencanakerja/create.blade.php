@@ -29,7 +29,7 @@
                    <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Waktu Mulai:<b style="color:red">*</b></label>
-                        <input type="datetime-local" class="form-control" id="waktu_mulai" name="waktu_mulai"
+                        <input type="text" class="form-control" id="waktu_mulai" name="waktu_mulai"
                             placeholder="Masukkan waktu mulai" />
                         @error('waktu_mulai')
                         <span class="form-text text-danger">{{ $message }}</span>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label>Waktu Selesai:<b style="color:red">*</b></label>
-                        <input type="datetime-local" class="form-control" id="waktu_selesai"
+                        <input type="text" class="form-control" id="waktu_selesai"
                             name="waktu_selesai" placeholder="Masukkan waktu selesai" />
                         @error('waktu_selesai')
                         <span class="form-text text-danger">{{ $message }}</span>
@@ -102,9 +102,17 @@
       
         });
 
-       
-   
+        $('#waktu_mulai').datetimepicker({
+         format: 'd/m/yyyy h:ii',
+         pick12HourFormat: false  
+         });
 
+         $('#waktu_selesai').datetimepicker({
+            format: 'd/m/yyyy h:ii',
+         pick12HourFormat: false  
+         });
+   
+ 
 
 </script>
 

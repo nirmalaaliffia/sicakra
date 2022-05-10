@@ -120,7 +120,7 @@
                                 <li class="nav-item"><a href="{{ route('user.page') }}">Dashboard</a></li>
                                 
                                 @elseif(auth()->user()->hasRole('kelurahan'))
-                                <li class="nav-item"><a href="{{ route('kelurahan.page') }}">Dashboarda</a></li>
+                                <li class="nav-item"><a href="{{ route('kelurahan.page') }}">Dashboard</a></li>
                               
                                 @elseif(auth()->user()->hasRole('kecamatan'))
                                 <li class="nav-item"><a href="{{ route('kecamatan.page') }}">Dashboard</a></li>

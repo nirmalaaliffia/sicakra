@@ -86,9 +86,25 @@ Route::middleware('auth')->group(function () {
             Route::get('verifikasi/laporanSpj/bukaKuncian/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'bukaKuncianRealisasi'])->name('verifikasi.laporanSpj.bukaKuncian');
 
             Route::get('verifikasi/laporanSpj/readOnly/{id}', [App\Http\Controllers\Kecamatan\VerifikasiController::class, 'readOnly'])->name('verifikasi.laporanSpj.readOnly');
-            // Route::get('laporanSpj', [App\Http\Controllers\Kelurahan\LaporanController::class, 'index'])->name('laporanSpj');
-            // Route::get('laporanSpj/create/{id}', [App\Http\Controllers\Kelurahan\LaporanController::class, 'create'])->name('laporanSpj.create');
-            // Route::get('laporanSpj/ajukan/{id}', [App\Http\Controllers\Kelurahan\LaporanController::class, 'ajukan'])->name('laporanSpj.ajukan');
+           
+
+            //membuat rencana kerja
+            Route::get('rencana/daftar', [App\Http\Controllers\Kecamatan\RencanaController::class, 'index'])->name('rencana.daftar');
+            Route::get('rencana/create', [App\Http\Controllers\Kecamatan\RencanaController::class, 'create'])->name('rencana.create');
+            Route::post('rencana/store', [App\Http\Controllers\Kecamatan\RencanaController::class, 'store'])->name('rencana.store');
+            Route::get('rencana/show/{id}', [App\Http\Controllers\Kecamatan\RencanaController::class, 'show'])->name('rencana.show');
+            Route::get('rencana/edit/{id}', [App\Http\Controllers\Kecamatan\RencanaController::class, 'edit'])->name('rencana.edit');
+            Route::put('rencana/{id}/edit', [App\Http\Controllers\Kecamatan\RencanaController::class, 'update'])->name('rencana.update');
+            Route::delete('/rencana/{id}', [App\Http\Controllers\Kecamatan\RencanaController::class, 'destroy'])->name('rencana.destroy');
+            Route::get('rencana/list/diajukan', [App\Http\Controllers\Kecamatan\RencanaController::class, 'daftarDiajukan'])->name('rencana.diajukan');
+            Route::get('rencana/list/disetujui', [App\Http\Controllers\Kecamatan\RencanaController::class, 'daftarDisetujui'])->name('rencana.disetujui');
+            Route::get('rencana/list/ditolak', [App\Http\Controllers\Kecamatan\RencanaController::class, 'daftarDitolak'])->name('rencana.ditolak');
+            Route::get('laporanSpj', [App\Http\Controllers\Kecamatan\LaporanController::class, 'index'])->name('laporanSpj');
+            Route::get('laporanSpj/create/{id}', [App\Http\Controllers\Kecamatan\LaporanController::class, 'create'])->name('laporanSpj.create');
+            Route::post('laporanSpj/ajukan/{id}', [App\Http\Controllers\Kecamatan\LaporanController::class, 'ajukan'])->name('laporanSpj.ajukan');
+            Route::post('laporanSpj/ajukanBatal/{id}', [App\Http\Controllers\Kecamatan\LaporanController::class, 'ajukanBatal'])->name('laporanSpj.ajukanBatal');
+            Route::post('laporanSpj/store', [App\Http\Controllers\Kecamatan\LaporanController::class, 'store'])->name('laporanSpj.store');
+            Route::put('laporanSpj/{id}/destroy', [App\Http\Controllers\Kecamatan\LaporanController::class, 'destroy'])->name('laporanSpj.destroy');
         });
        
     });
